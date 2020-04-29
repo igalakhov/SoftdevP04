@@ -1,0 +1,10 @@
+ivanG, judeR, moodyR - 2020-04-26 21:00
+    Created initial design document
+
+ivanG, judeR, moodyR - 2020-04-28 21:30
+    Revised first issue (opened by team Mos and Friends) and updated design doc
+        - specifically, added a project description and converted the diagrams to not be hand drawn
+
+ivanG - 2020-04-19
+    Created gitignore
+    Push devlog to git
