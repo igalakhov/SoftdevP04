@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<title>Page Title</title>
+<script src="d3.min.js"></script>
+<script src="waves.js"></script>
+<link rel="stylesheet" type="text/css" href="theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<h1 class="fade-in">Your Sequences are Loading</h1>
+
+<canvas id="canvasDemo" height="800" width="1200">
+<script>
+d3.select("h1").style("color", "maroon");
+var ctx = document.getElementById('canvasDemo').getContext("2d");
+function Bar(x,y){
+  this.x=x;
+  this.y=y;
+}
+
+function DrawNode(x,y,r){
+  ctx.beginPath();
+  ctx.arc(x,y,r,0, Math.PI*2, true)
+  ctx.stroke();
+
+}
+
+var time = 0
+//Ok, baaically we're gonna make a sin function, and it's gonna span most of the canvas
+//It will have a period of 800
+//f(x) = 600 sin(Math.2*PI/(800)(x + t))
+//essentially you are moving along a wabve
+function drawWave(){
+  var i;
+  clear();
+  for (i = 50; i < 1200; i+= 50) {
+    DrawNode(i, 60*Math.sin((2*Math.PI/1200) * (i + time)) + 250, 10)
+  }
+}
+
+function tick(){
+  time += 10
+}
+
+
+function clear(){
+  ctx.beginPath();
+  ctx.fillStyle = "white";
+  ctx.fillRect(0,0,1200,1000);
+  ctx.fill()
+  ctx.fillStyle = "black"
+}
+
+window.setInterval(tick, 10);
+window.setInterval(drawWave, 10);
+
+drawWave();
+
+
+</script>
+
+
+</body>
+</html>
