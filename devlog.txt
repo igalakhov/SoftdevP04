@@ -8,3 +8,8 @@ ivanG, judeR, moodyR - 2020-04-28 21:30
 ivanG - 2020-04-19
     Created gitignore
     Push devlog to git
+
+ivanG -- 2020-04-30 21:15
+    Created makefile for running and installing requirements
+    Initialized basic flask app
+    Update gitignore to ignore veirtualenv
