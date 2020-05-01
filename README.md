@@ -2,7 +2,7 @@
 
 ### What is this project?
 
-The OEI is an online repository of forumula's to generate integer sequences. It's often interesting to input in random integers, 
+The OEIS is an online repository of forumula's to generate integer sequences. It's often interesting to input in random integers, 
 and see what equations can generate the inputted integers.  
 
 Our app visualizes this using a system of nodes and links. 
@@ -11,9 +11,18 @@ One sequence is visualized as a left-to-right sequence of nodes, and when two se
 Each sequence is given a unique color of link, and nodes are hoverable to reveal what sequence(s) the node belongs to. 
 The central nodes will always remain editable, so the user can tinker with slightly adjusting the inputs and seeing what sequences are generated.  
 
+### API's Used
+PyOEIS is a python library that interfaces with the OEIS and facilitates sequence operations.  
+We use this API to retrieve the data which we then parse and present to the user.  
+
 ### How to Run
-```make install```  
-```make run```  
+``` 
+git clone git@github.com:igalakhov/SoftdevP04.git
+cd Softdev P04
+make install  
+make run
+```
+
 #### Dependencies 
 - python3
 - pip3
