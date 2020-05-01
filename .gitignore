@@ -1,5 +1,6 @@
 .idea/**
 venv/**
+venv
 
 # Created by https://www.gitignore.io/api/vim,flask,python,pycharm,sublimetext,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=vim,flask,python,pycharm,sublimetext,visualstudiocode
@@ -307,6 +308,7 @@ tags
 .vim
 
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
