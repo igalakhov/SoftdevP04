@@ -11,6 +11,16 @@ One sequence is visualized as a left-to-right sequence of nodes, and when two se
 Each sequence is given a unique color of link, and nodes are hoverable to reveal what sequence(s) the node belongs to. 
 The central nodes will always remain editable, so the user can tinker with slightly adjusting the inputs and seeing what sequences are generated.  
 
+### How to Run
+```make install```  
+```make run```  
+#### Dependencies 
+- python3
+- pip3
+- make
+- at least 10 mb free space
+
+
 
 ### The Team
 Project Manager- Ivan Galakhov  
