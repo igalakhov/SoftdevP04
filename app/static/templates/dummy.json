@@ -1,0 +1,63 @@
+{
+	"nodes": [
+		{
+			"name": "r1",
+			"label": "Person",
+			"id": 1,
+			"root" : true
+		},
+		{
+			"name": "r2",
+			"label": "Person",
+			"id": 2,
+			"root": true
+		},
+		{
+			"name": "r3",
+			"label": "Database",
+			"id": 3,
+			"root": true
+		},
+		{
+			"name": "Ivan",
+			"label": "Database",
+			"id": 4,
+			"root": false
+		},
+		{
+			"name": "Jude",
+			"label": "Database",
+			"id": 4,
+			"root": false
+		},
+		{
+			"name": "Moody",
+			"label": "Database",
+			"id": 4,
+			"root": false
+		}
+	],
+	"links": [
+		{
+			"source": 1,
+			"target": 2,
+			"type": "KNOWS",
+			"since": 2010
+		},
+		{
+			"source": 1,
+			"target": 3,
+			"type": "FOUNDED"
+		},
+		{
+			"source": 2,
+			"target": 3,
+			"type": "WORKS_ON"
+		},
+		{
+			"source": 3,
+			"target": 4,
+			"type": "IS_A"
+		}
+	]
+}
