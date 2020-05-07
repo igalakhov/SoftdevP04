@@ -18,5 +18,7 @@ rahmanM -- 2020-05-05/05 9:33PM EST
     Hammered out the framework to render a node graph given JSON data
     Preliminary whiteboarding on the backend-front end API
     Pretty and animated/ draggable nodes
+    Reorganized file structure
+    Root directory of flask server serves the intial JS 
     TBD: SVG redraw bug
     TBD: Central Node Naming Specification
