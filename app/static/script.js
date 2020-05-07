@@ -20,29 +20,56 @@ var simulation = d3.forceSimulation()
 
 
 let graph = {
+	// "nodes": [
+	// 	{ "id": "3", "group": 1 },
+	// 	{ "id": "4", "group": 2 },
+	// 	{ "id": "5", "group": 3 },
+	// 	{ "id": "0", "group": 4 , fx:441, fy:334},
+	// 	{ "id": "1", "group": 5 , fx:513, fy:332},
+	// 	{ "id": "2", "group": 1 , fx:593, fy:330},
+	// 	{ "id": "9", "group": 2 },
+	// 	{ "id": "10", "group": 3 },
+	// 	{ "id": "11", "group": 4 },
+	// 	{ "id": "12", "group": 5 }
+	// ],
+
 	"nodes": [
-		{ "id": "1", "group": 1 },
-		{ "id": "2", "group": 2 },
-		{ "id": "4", "group": 3 },
-		{ "id": "8", "group": 4 },
-		{ "id": "16", "group": 5 },
-		{ "id": "11", "group": 1 },
-		{ "id": "12", "group": 2 },
-		{ "id": "14", "group": 3 },
-		{ "id": "18", "group": 4 },
-		{ "id": "116", "group": 5 }
+		{ "id": "0", fx: 441, fy: 334 , central:true},
+		{ "id": "1", fx: 513, fy: 332 , central:true},
+		{ "id": "2", fx: 593, fy: 330 , central:true},
+		{ "id": "3" },
+		{ "id": "4" },
+		{ "id": "5" },
+		{ "id": "9" },
+		{ "id": "10"},
+		{ "id": "11"},
+		{ "id": "12"}
 	],
 	"links": [
+		// { "source": "3", "target": "4", "value": 1 },
+		// { "source": "3", "target": "5", "value": 1 },
+
+		{ "source": "4", "target": "0", "value": 1 },
+		{ "source": "5", "target": "0", "value": 1 },
+
+		{ "source": "0", "target": "1", "value": 1 },
 		{ "source": "1", "target": "2", "value": 1 },
-		{ "source": "2", "target": "4", "value": 1 },
-		{ "source": "4", "target": "8", "value": 1 },
-		{ "source": "4", "target": "8", "value": 1 },
-		{ "source": "8", "target": "16", "value": 1 },
-		{ "source": "16", "target": "1", "value": 1 }
+		{ "source": "2", "target": "9", "value": 1 },
+		{ "source": "2", "target": "10", "value": 1 },
+		{ "source": "2", "target": "11", "value": 1 },
+		{ "source": "10", "target": "12", "value": 1 }
 	]
 }
 
-
+function get(url, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+	}
+	xmlHttp.open("GET", url, true); 
+	xmlHttp.send(null);
+}
 
 
 
@@ -94,7 +121,7 @@ function run(graph) {
 			.attr("y2", function (d) { return d.target.y; });
 
 		node
-			.attr("r", 16)
+			.attr("r", function(d){ if (d.central){return 20} else {return 16}})
 			.style("fill", "#efefef")
 			.style("stroke", "#424242")
 			.style("stroke-width", "1px")
