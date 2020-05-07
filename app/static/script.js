@@ -128,6 +128,10 @@ function dragended(d) {
 	//simulation.unfix(d);
 }
 
+
+run(graph);
+
+
 var svgnode = document.getElementById("svg");
 
 var clear = function () {
