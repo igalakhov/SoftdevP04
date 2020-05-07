@@ -13,3 +13,10 @@ ivanG -- 2020-04-30 21:15
     Created makefile for running and installing requirements
     Initialized basic flask app
     Update gitignore to ignore veirtualenv
+
+rahmanM -- 2020-05-05/05 9:33PM EST
+    Hammered out the framework to render a node graph given JSON data
+    Preliminary whiteboarding on the backend-front end API
+    Pretty and animated/ draggable nodes
+    TBD: SVG redraw bug
+    TBD: Central Node Naming Specification
