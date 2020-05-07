@@ -4,8 +4,27 @@
 	body {
 		font-family: "Inconsolata";
 	}
+
+	#js {
+		position: right;
+	}
+
+	#svg {
+		position: left;
+	}
 </style>
-<svg id="svg" width="960" height="600"></svg>
+
+<div class="row">
+
+	<div id="svg">
+		<svg width="960" height="600"></svg>
+	</div>
+
+	<div id="js">
+		<canvas width="100" height="600"></canvas>
+	</div>
+
+</div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
 <script src="static/script.js"></script>
