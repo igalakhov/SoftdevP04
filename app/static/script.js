@@ -1,4 +1,5 @@
 
+// SVG CODE
 var svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
@@ -46,14 +47,11 @@ let graph = {
 	]
 }
 
-function get(url, callback) {
+function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			callback(xmlHttp.responseText);
-	}
-	xmlHttp.open("GET", url, true); 
+	xmlHttp.open("GET", theUrl, false); // false for synchronous request
 	xmlHttp.send(null);
+	return xmlHttp.responseText;
 }
 
 
@@ -140,12 +138,6 @@ function dragended(d) {
 	//simulation.unfix(d);
 }
 
-
-run(graph);
-
-
-var svgnode = document.getElementById("svg");
-
 var clear = function () {
 	var curr = svgnode.firstChild;
 	while (curr) {
@@ -156,4 +148,19 @@ var clear = function () {
 
 var hackclear = function () {
 	svg.append("g").append("rect").attr("width", 960).attr("height", 600).attr("style", "fill:rgb(255,255,255);");
+}
+
+run(graph);
+
+var submit = function () {
+	inp1 = document.getElementById("inp1").value;
+	inp2 = document.getElementById("inp2").value;
+	inp3 = document.getElementById("inp3").value;
+	query0 = "/api?int1=w1&int2=w2&int3=w3"
+	query1 = query0.replace("w1", inp1);
+	query2 = query1.replace("w2", inp2);
+	query3 = query2.replace("w3", inp3);
+	console.log(query3);
+	json = httpGet(query3);
+	console.log(json);
 }
