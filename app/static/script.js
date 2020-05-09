@@ -156,11 +156,9 @@ var submit = function () {
 	inp1 = document.getElementById("inp1").value;
 	inp2 = document.getElementById("inp2").value;
 	inp3 = document.getElementById("inp3").value;
-	query0 = "/api?int1=w1&int2=w2&int3=w3"
-	query1 = query0.replace("w1", inp1);
-	query2 = query1.replace("w2", inp2);
-	query3 = query2.replace("w3", inp3);
-	console.log(query3);
-	json = httpGet(query3);
+	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}`;
+	console.log(query0);
+	json = httpGet(query0);
 	console.log(json);
+	
 }
