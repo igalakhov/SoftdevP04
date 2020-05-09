@@ -9,35 +9,23 @@ var simulation = d3.forceSimulation()
 	//.force("charge", d3.forceManyBody().strength(-200))
 	.force('charge', d3.forceManyBody()
 		.strength(-200)
-		.theta(0.8)
+		.theta(2)
 		.distanceMax(150)
-	)
+		.distanceMin(50)
+	);
 	// 		.force('collide', d3.forceCollide()
 	//       .radius(d => 40)
 	//       .iterations(2)
 	//     )	
-	.force("center", d3.forceCenter(width / 2, height / 2));
+	// .force("center", d3.forceCenter(width / 2, height / 2));
 
 
 let graph = {
-	// "nodes": [
-	// 	{ "id": "3", "group": 1 },
-	// 	{ "id": "4", "group": 2 },
-	// 	{ "id": "5", "group": 3 },
-	// 	{ "id": "0", "group": 4 , fx:441, fy:334},
-	// 	{ "id": "1", "group": 5 , fx:513, fy:332},
-	// 	{ "id": "2", "group": 1 , fx:593, fy:330},
-	// 	{ "id": "9", "group": 2 },
-	// 	{ "id": "10", "group": 3 },
-	// 	{ "id": "11", "group": 4 },
-	// 	{ "id": "12", "group": 5 }
-	// ],
 
 	"nodes": [
 		{ "id": "0", fx: 441, fy: 334 , central:true},
 		{ "id": "1", fx: 513, fy: 332 , central:true},
 		{ "id": "2", fx: 593, fy: 330 , central:true},
-		{ "id": "3" },
 		{ "id": "4" },
 		{ "id": "5" },
 		{ "id": "9" },
@@ -46,12 +34,9 @@ let graph = {
 		{ "id": "12"}
 	],
 	"links": [
-		// { "source": "3", "target": "4", "value": 1 },
-		// { "source": "3", "target": "5", "value": 1 },
 
 		{ "source": "4", "target": "0", "value": 1 },
 		{ "source": "5", "target": "0", "value": 1 },
-
 		{ "source": "0", "target": "1", "value": 1 },
 		{ "source": "1", "target": "2", "value": 1 },
 		{ "source": "2", "target": "9", "value": 1 },
@@ -76,10 +61,10 @@ function get(url, callback) {
 
 function run(graph) {
 
-	graph.links.forEach(function (d) {
-		//     d.source = d.source_id;    
-		//     d.target = d.target_id;
-	});
+	// graph.links.forEach(function (d) {
+	// 	//     d.source = d.source_id;    
+	// 	//     d.target = d.target_id;
+	// });
 
 	var link = svg.append("g")
 		.style("stroke", "#aaa")
@@ -167,4 +152,8 @@ var clear = function () {
 		svgnode.removeChild(curr);
 		curr = svgnode.firstChild;
 	}
+}
+
+var hackclear = function () {
+	svg.append("g").append("rect").attr("width", 960).attr("height", 600).attr("style", "fill:rgb(255,255,255);");
 }
