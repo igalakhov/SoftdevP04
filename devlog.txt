@@ -32,3 +32,4 @@ rahmanM -- 2020-08-05 2:02PM EST
     HTML form for testing while JS form is under development 
     Finalized the API specifications and write a blank route for it in the Flask App
     Reimplemented the node physics to everything is less "floaty"
+    Submit button makes the API call!
