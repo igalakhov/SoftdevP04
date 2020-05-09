@@ -9,7 +9,7 @@ var simulation = d3.forceSimulation()
 	.force("link", d3.forceLink().id(function (d) { return d.id; }))
 	//.force("charge", d3.forceManyBody().strength(-200))
 	.force('charge', d3.forceManyBody()
-		.strength(-200)
+		.strength(-1000)
 		.theta(2)
 		.distanceMax(150)
 		.distanceMin(50)
@@ -27,7 +27,7 @@ let graph = {
 		{ "id": "0", fx: 441, fy: 334 , central:true},
 		{ "id": "1", fx: 513, fy: 332 , central:true},
 		{ "id": "2", fx: 593, fy: 330 , central:true},
-		{ "id": "4" },
+		{ "id": "4" , equation:["x^2"]},
 		{ "id": "5" },
 		{ "id": "9" },
 		{ "id": "10"},
@@ -54,7 +54,17 @@ function httpGet(theUrl) {
 	return xmlHttp.responseText;
 }
 
+function mouseover(d){
+	// font-family="sans-serif" font-size="20px"
+	svg.append("text").attr("fill", "red").attr("id", "hover").attr("x", d.x + 0).attr("y", d.y + 15).text(d.equation)
+	console.log(d);
+}
 
+function mouseout(d){
+	console.log(d);
+	var elem = document.querySelector("#hover")
+	elem.parentNode.removeChild(elem);
+}
 
 
 function run(graph) {
@@ -79,7 +89,9 @@ function run(graph) {
 		.call(d3.drag()
 			.on("start", dragstarted)
 			.on("drag", dragged)
-			.on("end", dragended));
+			.on("end", dragended))
+		.on("mouseover", mouseover)
+		.on("mouseout", mouseout);
 
 	var label = svg.append("g")
 		.attr("class", "labels")
@@ -104,7 +116,7 @@ function run(graph) {
 			.attr("y2", function (d) { return d.target.y; });
 
 		node
-			.attr("r", function(d){ if (d.central){return 20} else {return 16}})
+			.attr("r", function(d){ if (d.central){return 30} else {return 25}})
 			.style("fill", "#efefef")
 			.style("stroke", "#424242")
 			.style("stroke-width", "1px")
