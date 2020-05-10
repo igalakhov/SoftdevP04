@@ -24,10 +24,10 @@ var simulation = d3.forceSimulation()
 let graph = {
 
 	"nodes": [
-		{ "id": "0", fx: 441, fy: 334 , central:true},
-		{ "id": "1", fx: 513, fy: 332 , central:true},
-		{ "id": "2", fx: 593, fy: 330 , central:true},
-		{ "id": "4" , equation:["x^2"]},
+		{ "id": "0", "fx": 441, "fy": 334 , "central":true},
+		{ "id": "1", "fx": 513, "fy": 332 , "central":true},
+		{ "id": "2", "fx": 593, "fy": 330 , "central":true},
+		{ "id": "4" , "equation":["x^2"]},
 		{ "id": "5" },
 		{ "id": "9" },
 		{ "id": "10"},
@@ -46,6 +46,9 @@ let graph = {
 		{ "source": "10", "target": "12", "value": 1 }
 	]
 }
+
+console.log("HELLO I AM THE INIT JSON")
+console.log(typeof(graph))
 
 function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest();
@@ -172,5 +175,12 @@ var submit = function () {
 	console.log(query0);
 	json = httpGet(query0);
 	console.log(json);
+
+	console.log("HELLO I AM THE DEBUG JSON")
+	console.log(typeof(json))
+
+	hackclear();
+	finjson = JSON.parse(json)
+	run(finjson);
 	
 }

@@ -10,6 +10,33 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/debug")
+def debug():
+    return {
+
+	"nodes": [
+		{ "id": "0", "fx": 441, "fy": 334 , "central":True},
+		{ "id": "1", "fx": 513, "fy": 332 , "central":True},
+		{ "id": "2", "fx": 593, "fy": 330 , "central":True},
+		{ "id": "4" , "equation":["x^2"]},
+		{ "id": "5" },
+		{ "id": "9" },
+		{ "id": "10"},
+		{ "id": "11"},
+		{ "id": "12"}
+	],
+	"links": [
+
+		{ "source": "4", "target": "0", "value": 1 },
+		{ "source": "5", "target": "0", "value": 1 },
+		{ "source": "0", "target": "1", "value": 1 },
+		{ "source": "1", "target": "2", "value": 1 },
+		{ "source": "2", "target": "9", "value": 1 },
+		{ "source": "2", "target": "10", "value": 1 },
+		{ "source": "2", "target": "11", "value": 1 },
+		{ "source": "10", "target": "12", "value": 1 }
+	]
+}
 
 @app.route("/api")
 def api():
@@ -136,10 +163,10 @@ def api():
         'multi': False
     })
 
-    return dumps({
+    return {
         'nodes': ret_nodes,
         'links': ret_links
-    })
+    }
 
 
 if __name__ == "__main__":
