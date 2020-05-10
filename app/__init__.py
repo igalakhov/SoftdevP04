@@ -85,7 +85,7 @@ def api():
                 nodes_eq['left_%d_%d' % (j, i[0][j])].append(names[n])
 
         for j in range(len(i[0]) - 1):
-            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' % (j, i[0][j + 1]))].append(n)
+            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' % (j+1, i[0][j + 1]))].append(n)
 
         for j in range(len(i[1])):
             nodes.add('right_%d_%d' % (j, i[1][j]))
@@ -94,7 +94,7 @@ def api():
                 nodes_eq['right_%d_%d' % (j, i[1][j])].append(names[n])
 
         for j in range(len(i[1]) - 1):
-            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' % (j, i[1][j + 1]))].append(n)
+            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' % (j+1, i[1][j + 1]))].append(n)
 
     ret_links = []
     ret_nodes = []
