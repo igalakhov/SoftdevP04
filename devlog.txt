@@ -37,3 +37,7 @@ rahmanM -- 2020-08-05 2:02PM EST
 ivanG -- 2020-10-05 3:25 AM
     Started work on API
     Will finish tomorrow mid day
+
+ivanG -- 2020-10-05 5:00 PM
+    API now works on dummy data
+    Will connect to actual API now

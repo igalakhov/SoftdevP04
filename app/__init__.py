@@ -1,6 +1,7 @@
 from flask import *
 from random import random
 from collections import defaultdict
+from json import dumps
 
 app = Flask(__name__)
 
@@ -37,7 +38,7 @@ def api():
         cols.append(randcol())
         ps = 0
         for j in range(len(i) - len(pat) + 1):
-            print(j, i[j:j + len(pat)], pat, i[j:j + len(pat)] == pat)
+            # print(j, i[j:j + len(pat)], pat, i[j:j + len(pat)] == pat)
             if i[j:j + len(pat)] == pat:
                 ps = j
                 break
@@ -51,27 +52,27 @@ def api():
     for n in range(len(splits)):
         i = splits[n]
         for j in range(len(i[0])):
-            nodes.add('left_pos%d_%d' % (j, i[0][j]))
+            nodes.add('left_%d_%d' % (j, i[0][j]))
 
             if j != 0:
-                nodes_eq['left_pos%d_%d' % (j, i[0][j])].append(n)
+                nodes_eq['left_%d_%d' % (j, i[0][j])].append(names[n])
 
         for j in range(len(i[0]) - 1):
-            edges[('left_pos%d_%d' % (j, i[0][j]), 'left_pos%d_%d' % (j, i[0][j + 1]))].append(n)
+            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' % (j, i[0][j + 1]))].append(n)
 
         for j in range(len(i[1])):
-            nodes.add('right_pos%d_%d' % (j, i[1][j]))
+            nodes.add('right_%d_%d' % (j, i[1][j]))
 
             if j != 0:
-                nodes_eq['right_pos%d_%d' % (j, i[1][j])].append(n)
+                nodes_eq['right_%d_%d' % (j, i[1][j])].append(names[n])
 
         for j in range(len(i[1]) - 1):
-            edges[('right_pos%d_%d' % (j, i[1][j]), 'right_pos%d_%d' % (j, i[1][j + 1]))].append(n)
+            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' % (j, i[1][j + 1]))].append(n)
 
     ret_links = []
+    ret_nodes = []
 
     for i, j in edges.items():
-        print(i, j)
         for k in j:
             ret_links.append({
                 'source': i[0],
@@ -85,7 +86,60 @@ def api():
     # print(ret_links)
     print(nodes_eq)
 
-    return request.args
+    for i, j in nodes_eq.items():
+        ret_nodes.append({
+            'id': i,
+            'label': i.split('_')[1],
+            'equation': j
+        })
+
+    ret_nodes.append({
+        'id': 'left_%d_%d' % (0, pat[0]),
+        'label': str(pat[0]),
+        'fx': 441,
+        'fy': 334,
+        'central': True,
+        'equation': list(names)
+    })
+
+    ret_nodes.append({
+        'id': 'center_center',
+        'label': str(pat[0]),
+        'fx': 513,
+        'fy': 332,
+        'central': True,
+        'equation': list(names)
+    })
+
+    ret_nodes.append({
+        'id': 'right_%d_%d' % (0, pat[2]),
+        'label': str(pat[2]),
+        'fx': 593,
+        'fy': 330,
+        'central': True,
+        'equation': list(names)
+    })
+
+    ret_links.append({
+        'source': 'left_%d_%d' % (0, pat[0]),
+        'target': 'center_center',
+        'value': 1,
+        'color': [0, 0, 0],
+        'multi': False
+    })
+
+    ret_links.append({
+        'source': 'right_%d_%d' % (0, pat[2]),
+        'target': 'center_center',
+        'value': 1,
+        'color': [0, 0, 0],
+        'multi': False
+    })
+
+    return dumps({
+        'nodes': ret_nodes,
+        'links': ret_links
+    })
 
 
 if __name__ == "__main__":
