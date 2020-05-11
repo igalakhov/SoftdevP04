@@ -178,6 +178,7 @@ var submit = function () {
 
 	console.log("HELLO I AM THE DEBUG JSON")
 	console.log(typeof(json))
+	document.getElementById("svg").innerHTML= "";
 
 	hackclear();
 	finjson = JSON.parse(json)
