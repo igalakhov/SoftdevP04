@@ -2,6 +2,7 @@ from flask import *
 from random import random
 from collections import defaultdict
 from json import dumps
+from pyoeis import OEISClient
 
 app = Flask(__name__)
 
@@ -10,50 +11,62 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
 @app.route("/debug")
 def debug():
     return {
 
-	"nodes": [
-		{ "id": "0", "fx": 441, "fy": 334 , "central":True},
-		{ "id": "1", "fx": 513, "fy": 332 , "central":True},
-		{ "id": "2", "fx": 593, "fy": 330 , "central":True},
-		{ "id": "4" , "equation":["x^2"]},
-		{ "id": "5" },
-		{ "id": "9" },
-		{ "id": "10"},
-		{ "id": "11"},
-		{ "id": "12"}
-	],
-	"links": [
+        "nodes": [
+            {"id": "0", "fx": 441, "fy": 334, "central": True},
+            {"id": "1", "fx": 513, "fy": 332, "central": True},
+            {"id": "2", "fx": 593, "fy": 330, "central": True},
+            {"id": "4", "equation": ["x^2"]},
+            {"id": "5"},
+            {"id": "9"},
+            {"id": "10"},
+            {"id": "11"},
+            {"id": "12"}
+        ],
+        "links": [
 
-		{ "source": "4", "target": "0", "value": 1 },
-		{ "source": "5", "target": "0", "value": 1 },
-		{ "source": "0", "target": "1", "value": 1 },
-		{ "source": "1", "target": "2", "value": 1 },
-		{ "source": "2", "target": "9", "value": 1 },
-		{ "source": "2", "target": "10", "value": 1 },
-		{ "source": "2", "target": "11", "value": 1 },
-		{ "source": "10", "target": "12", "value": 1 }
-	]
-}
+            {"source": "4", "target": "0", "value": 1},
+            {"source": "5", "target": "0", "value": 1},
+            {"source": "0", "target": "1", "value": 1},
+            {"source": "1", "target": "2", "value": 1},
+            {"source": "2", "target": "9", "value": 1},
+            {"source": "2", "target": "10", "value": 1},
+            {"source": "2", "target": "11", "value": 1},
+            {"source": "10", "target": "12", "value": 1}
+        ]
+    }
+
 
 @app.route("/api")
 def api():
-    print('--------------')
-    pat = [1, 2, 3]
-    lsts = (
-        [0, 5, 1, 2, 3, 4, 6, 7],
-        [1, 5, 1, 2, 3, 4, 6, 8],
-        [3, 2, 1, 1, 1, 2, 3, 10, 20],
-        [3, 2, 1, 1, 1, 2, 3, 10, 20],
+
+    if 'int1' not in request.args or 'int2' not in request.args or 'int3' not in request.args:
+        return '{}'
+
+    pat = [int(request.args['int1']), int(request.args['int2']), int(request.args['int3'])]
+
+    print(pat)
+
+    client = OEISClient()
+
+    res = client.lookup_by(prefix='%d,%d,%d' % tuple(pat), query='', max_seqs=10, list_func=True)
+
+    # for i in res:
+    #     print(i.unsigned_list, i.signed_list)
+
+    lsts = tuple(
+        i.unsigned_list if len(i.signed_list) == 0 else i.signed_list for i in res
     )
-    names = (
-        'label 1',
-        'label 2',
-        'label 3',
-        'label 4',
+    names = tuple(
+        i.name for i in res
     )
+
+    # print(lsts)
+    # print(names)
 
     def randcol():
         return [int(random() * 255), int(random() * 255), int(random() * 255)]
@@ -85,7 +98,7 @@ def api():
                 nodes_eq['left_%d_%d' % (j, i[0][j])].append(names[n])
 
         for j in range(len(i[0]) - 1):
-            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' % (j+1, i[0][j + 1]))].append(n)
+            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' % (j + 1, i[0][j + 1]))].append(n)
 
         for j in range(len(i[1])):
             nodes.add('right_%d_%d' % (j, i[1][j]))
@@ -94,7 +107,7 @@ def api():
                 nodes_eq['right_%d_%d' % (j, i[1][j])].append(names[n])
 
         for j in range(len(i[1]) - 1):
-            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' % (j+1, i[1][j + 1]))].append(n)
+            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' % (j + 1, i[1][j + 1]))].append(n)
 
     ret_links = []
     ret_nodes = []
@@ -111,7 +124,7 @@ def api():
             })
 
     # print(ret_links)
-    print(nodes_eq)
+    # print(nodes_eq)
 
     for i, j in nodes_eq.items():
         ret_nodes.append({

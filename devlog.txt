@@ -41,3 +41,7 @@ ivanG -- 2020-10-05 3:25 AM
 ivanG -- 2020-10-05 5:00 PM
     API now works on dummy data
     Will connect to actual API now
+
+ivanG -- 2020-10-05 11:07 PM
+    PyOEIS now works with the app
+    Pretty neat tbh
