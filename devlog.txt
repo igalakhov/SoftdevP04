@@ -45,3 +45,6 @@ ivanG -- 2020-10-05 5:00 PM
 ivanG -- 2020-10-05 11:07 PM
     PyOEIS now works with the app
     Pretty neat tbh
+
+ivanG -- 2020-11-05 6:30 PM
+    Added more parameters to API as per moody's request

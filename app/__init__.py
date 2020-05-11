@@ -43,17 +43,16 @@ def debug():
 
 @app.route("/api")
 def api():
-
-    if 'int1' not in request.args or 'int2' not in request.args or 'int3' not in request.args:
+    if 'int1' not in request.args or 'int2' not in request.args or 'int3' not in request.args or 'maxcount' not in request.args or 'maxext' not in request.args:
         return '{}'
 
     pat = [int(request.args['int1']), int(request.args['int2']), int(request.args['int3'])]
-
-    print(pat)
+    cnt = int(request.args['maxcount'])
+    ext = int(request.args['maxext'])
 
     client = OEISClient()
 
-    res = client.lookup_by(prefix='%d,%d,%d' % tuple(pat), query='', max_seqs=10, list_func=True)
+    res = client.lookup_by(prefix='%d,%d,%d' % tuple(pat), query='', max_seqs=cnt, list_func=True)
 
     # for i in res:
     #     print(i.unsigned_list, i.signed_list)
@@ -61,6 +60,7 @@ def api():
     lsts = tuple(
         i.unsigned_list if len(i.signed_list) == 0 else i.signed_list for i in res
     )
+
     names = tuple(
         i.name for i in res
     )
@@ -83,7 +83,9 @@ def api():
                 ps = j
                 break
 
-        splits.append((i[0:ps + 1][::-1], i[ps + len(pat) - 1:]))
+        l1 = i[0:ps + 1][::-1]
+        l2 = i[ps + len(pat) - 1:]
+        splits.append((l1[0:ext], l2[0:ext]))
 
     nodes = set()
     nodes_eq = defaultdict(list)
