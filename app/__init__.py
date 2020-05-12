@@ -206,8 +206,8 @@ def api():
         'id': 'left_%d_%d' % (0, pat[0]),
         'label': str(pat[0]),
         'pos': 'left',
-        'fx': 660,
-        'fy': 320,
+        'fx': 860,
+        'fy': 450,
         'central': True,
         'equation': list(names)
     })
@@ -216,8 +216,8 @@ def api():
         'id': 'center_center',
         'label': str(pat[1]),
         'pos': 'center',
-        'fx': 730,
-        'fy': 330,
+        'fx': 930,
+        'fy': 450,
         'central': True,
         'equation': list(names)
     })
@@ -226,8 +226,8 @@ def api():
         'id': 'right_%d_%d' % (0, pat[2]),
         'label': str(pat[2]),
         'pos': 'right',
-        'fx': 800,
-        'fy': 331,
+        'fx': 1000,
+        'fy': 450,
         'central': True,
         'equation': list(names)
     })
