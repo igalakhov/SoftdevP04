@@ -94,9 +94,9 @@ function mouseout(d){
 	console.log(d);
 	var elem = document.querySelector("#hover");
 	while (elem != null){
-	elem.parentNode.removeChild(elem);
+		elem.parentNode.removeChild(elem);
 		elem = document.querySelector("#hover");
-}
+	}
 }
 
 
@@ -106,6 +106,8 @@ function run(graph) {
 	// 	//     d.source = d.source_id;    
 	// 	//     d.target = d.target_id;
 	// });
+	
+	d3.selectAll("svg > *").remove();
 
 	if (typeof(graph) == ("string")){
 		graph = JSON.parse(graph);
@@ -127,6 +129,10 @@ function run(graph) {
 		.attr("r", 2)
 		.attr("cx", 500)
 		.attr("cy", 500)
+		.attr("x", 500)
+		.attr("y", 500)
+		.attr("vx", .05)
+		.attr("vy", .05)
 		.call(d3.drag()
 			.on("start", dragstarted)
 			.on("drag", dragged)
@@ -140,7 +146,9 @@ function run(graph) {
 		.data(graph.nodes)
 		.enter().append("text")
 		.attr("class", "label")
-		.text(function (d) { return d.id; });
+		.text(function (d) { return d.label; });
+
+	simulation.restart();
 
 	simulation
 		.nodes(graph.nodes)
@@ -157,7 +165,7 @@ function run(graph) {
 			.attr("y2", function (d) { return d.target.y; });
 
 		node
-			.attr("r", function(d){ if (d.central){return 30} else {return 25}})
+			.attr("r", function(d){; if (d.central){return 30} else {return 25}})
 			.style("fill", "#efefef")
 			.style("stroke", "#424242")
 			.style("stroke-width", "1px")
@@ -205,11 +213,14 @@ var hackclear = function () {
 
 // run(graph);
 
+console.log("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4");
 
 httpGetAsync("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4", run);
-
+// window.location.reload(false); 
 
 var submit = function () {
+	// if (!init){
+	// }
 	inp1 = document.getElementById("inp1").value;
 	inp2 = document.getElementById("inp2").value;
 	inp3 = document.getElementById("inp3").value;
@@ -219,7 +230,7 @@ var submit = function () {
 	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
 	console.log(query0);
 	// hackclear();
-	document.getElementById("svg").innerHTML= "";
+	// document.getElementById("svg").innerHTML= "";
 
 	// json = httpGet(query0);
 
