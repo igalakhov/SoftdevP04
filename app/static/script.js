@@ -224,12 +224,9 @@ var hackclear = function () {
 	svg.append("g").append("rect").attr("width", 960).attr("height", 600).attr("style", "fill:rgb(255,255,255);");
 }
 
-// run(graph);
+// httpGetAsync("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4", run);
 
-console.log("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4");
-
-httpGetAsync("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4", run);
-// window.location.reload(false); 
+httpGetAsync("/default", run);
 
 var submit = function () {
 	inp1 = document.getElementById("inp1").value;
