@@ -178,7 +178,7 @@ function run(graph) {
 		label
 			.attr("x", function (d) { return d.x; })
 			.attr("y", function (d) { return d.y; })
-			.style("font-size", "10px").style("fill", "#333");
+			.style("font-size", "20px").style("fill", "#333");
 	}
 }
 
