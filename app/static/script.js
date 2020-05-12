@@ -86,6 +86,7 @@ function mouseover(d){
 			.attr("id", "hover")
 			.attr("x", d.x + 0)
 			.attr("y", (d.y - 50) +  (15*i))
+			.style("font-size", "18px")
 			.text(d.equation[i]);
 	}
 	console.log(d);
