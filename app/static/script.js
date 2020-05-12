@@ -92,8 +92,11 @@ function mouseover(d){
 
 function mouseout(d){
 	console.log(d);
-	var elem = document.querySelector("#hover")
+	var elem = document.querySelector("#hover");
+	while (elem != null){
 	elem.parentNode.removeChild(elem);
+		elem = document.querySelector("#hover");
+}
 }
 
 
