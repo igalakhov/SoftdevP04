@@ -65,6 +65,16 @@ function httpGet(theUrl) {
 	return xmlHttp.responseText;
 }
 
+function httpGetAsync(theurl, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+	}
+	xmlHttp.open("GET", theurl, true); // true for asynchronous 
+	xmlHttp.send(null);
+}
+
 function mouseover(d){
 	// font-family="sans-serif" font-size="20px"
 	svg.append("text").attr("fill", "red").attr("id", "hover").attr("x", d.x + 0).attr("y", d.y + 15).text(d.equation)
