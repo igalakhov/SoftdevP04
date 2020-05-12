@@ -201,17 +201,22 @@ var submit = function () {
 	inp1 = document.getElementById("inp1").value;
 	inp2 = document.getElementById("inp2").value;
 	inp3 = document.getElementById("inp3").value;
-	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}`;
+	maxc = 3;
+	maxext = 4;
+	
+	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
 	console.log(query0);
-	json = httpGet(query0);
-	console.log(json);
-
-	console.log("HELLO I AM THE DEBUG JSON")
-	console.log(typeof(json))
+	// hackclear();
 	document.getElementById("svg").innerHTML= "";
 
-	hackclear();
-	finjson = JSON.parse(json)
-	run(finjson);
+	// json = httpGet(query0);
+
+	httpGetAsync(query0, run);
+
+	// console.log(json);
+
+	// console.log("HELLO I AM THE DEBUG JSON")
+	// console.log(typeof(json))
+
 	
 }
