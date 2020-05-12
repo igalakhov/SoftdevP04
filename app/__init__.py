@@ -148,7 +148,7 @@ def api():
 
     ret_nodes.append({
         'id': 'center_center',
-        'label': str(pat[0]),
+        'label': str(pat[1]),
         'pos': 'center',
         'fx': 513,
         'fy': 332,
