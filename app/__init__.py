@@ -131,7 +131,7 @@ def api():
     for i, j in nodes_eq.items():
         ret_nodes.append({
             'id': i,
-            'label': i.split('_')[1],
+            'label': i.split('_')[2],
             'pos': i.split('_')[0],
             'equation': j
         })
