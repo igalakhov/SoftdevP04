@@ -85,7 +85,7 @@ function mouseover(d){
 			.attr("fill", "red")
 			.attr("id", "hover")
 			.attr("x", d.x + 0)
-			.attr("y", (d.y - 50) +  (15*i))
+			.attr("y", (d.y + 50) +  (15*i))
 			.style("font-size", "18px")
 			.text(d.equation[i]);
 	}
@@ -119,7 +119,7 @@ function run(graph) {
 
 	var link = svg.append("g")
 		.style("stroke", "#aaa")
-		.style("stroke-width", 10)
+		.style("stroke-width", 5)
 		.selectAll("line")
 		.data(graph.links)
 		.enter().append("line");
@@ -172,13 +172,13 @@ function run(graph) {
 			.attr("r", function(d){; if (d.central){return 30} else {return 25}})
 			.style("fill", "#efefef")
 			.style("stroke", "#424242")
-			.style("stroke-width", "1px")
+			.style("stroke-width", "0px")
 			.attr("cx", function (d) { return d.x + 5; })
 			.attr("cy", function (d) { return d.y - 3; });
 
 		label
 			.attr("x", function (d) { return d.x; })
-			.attr("y", function (d) { return d.y; })
+			.attr("y", function (d) { return d.y + 2; })
 			.style("font-size", "20px").style("fill", "#333");
 	}
 }
