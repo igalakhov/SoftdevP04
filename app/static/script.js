@@ -14,6 +14,7 @@ var simulation = d3.forceSimulation()
 		.distanceMax(400)
 		.distanceMin(0)
 	)
+	.force('collision', d3.forceCollide().radius(16))
 	// .force('collision', d3.forceCollide().radius(30))
 	// .forceX()
 	.force("x", d3.forceX(function (d){return 500}))
@@ -117,6 +118,7 @@ function run(graph) {
 
 	var link = svg.append("g")
 		.style("stroke", "#aaa")
+		.style("stroke-width", 10)
 		.selectAll("line")
 		.data(graph.links)
 		.enter().append("line");
@@ -127,10 +129,10 @@ function run(graph) {
 		.data(graph.nodes)
 		.enter().append("circle")
 		.attr("r", 2)
-		.attr("cx", 500)
-		.attr("cy", 500)
-		.attr("x", 500)
-		.attr("y", 500)
+		// .attr("cx", 500)
+		// .attr("cy", 500)
+		// .attr("x", 500)
+		// .attr("y", 500)
 		.attr("vx", .05)
 		.attr("vy", .05)
 		.call(d3.drag()
@@ -162,7 +164,8 @@ function run(graph) {
 			.attr("x1", function (d) { return d.source.x; })
 			.attr("y1", function (d) { return d.source.y; })
 			.attr("x2", function (d) { return d.target.x; })
-			.attr("y2", function (d) { return d.target.y; });
+			.attr("y2", function (d) { return d.target.y; })
+			.style("stroke", function (d) { return rgbToHex(d.color[0], d.color[1], d.color[2]) });
 
 		node
 			.attr("r", function(d){; if (d.central){return 30} else {return 25}})
@@ -177,6 +180,16 @@ function run(graph) {
 			.attr("y", function (d) { return d.y; })
 			.style("font-size", "10px").style("fill", "#333");
 	}
+}
+
+
+function rgbToHex(r, g, b) {
+	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function componentToHex(c) {
+	var hex = c.toString(16);
+	return hex.length == 1 ? "0" + hex : hex;
 }
 
 function dragstarted(d) {
@@ -219,27 +232,12 @@ httpGetAsync("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4", run);
 // window.location.reload(false); 
 
 var submit = function () {
-	// if (!init){
-	// }
 	inp1 = document.getElementById("inp1").value;
 	inp2 = document.getElementById("inp2").value;
 	inp3 = document.getElementById("inp3").value;
 	maxc = 3;
 	maxext = 4;
-	
 	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
 	console.log(query0);
-	// hackclear();
-	// document.getElementById("svg").innerHTML= "";
-
-	// json = httpGet(query0);
-
 	httpGetAsync(query0, run);
-
-	// console.log(json);
-
-	// console.log("HELLO I AM THE DEBUG JSON")
-	// console.log(typeof(json))
-
-	
 }
