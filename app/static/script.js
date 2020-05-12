@@ -113,6 +113,8 @@ function run(graph) {
 		.data(graph.nodes)
 		.enter().append("circle")
 		.attr("r", 2)
+		.attr("cx", 500)
+		.attr("cy", 500)
 		.call(d3.drag()
 			.on("start", dragstarted)
 			.on("drag", dragged)
