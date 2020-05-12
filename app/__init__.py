@@ -61,7 +61,10 @@ def default_json():
                 "label": "Hover over the nodes", "equation": ["You can also drag the nodes"], "fx":100, "fy":700},
 
             {"id": "8", "central": True,
-                "label": "super secret settings", "equation": ["be warned"], "fx":900, "fy":700, "settings":True}
+                "label": "super secret settings", "equation": ["be warned"], "fx":900, "fy":700, "settings":True},
+
+            {"id": "9", "central": True,
+                "label": "explore this page before diving into 🪒ISOEIS", "equation": ["be warned"], "fx":100, "fy":100, "settings":True}
             
         ],
         "links": [
