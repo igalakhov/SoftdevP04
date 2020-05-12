@@ -1,4 +1,6 @@
 
+var maxc = 4;
+var maxext = 4;
 // SVG CODE
 var svg = d3.select("svg"),
 	width = +svg.attr("width"),
@@ -6,7 +8,7 @@ var svg = d3.select("svg"),
 
 
 var simulation = d3.forceSimulation()
-	.force("link", d3.forceLink().id(function (d) { return d.id; }))
+	.force("link", d3.forceLink().id(function (d) { return d.id; }).distance(70) )
 	//.force("charge", d3.forceManyBody().strength(-200))
 	.force('charge', d3.forceManyBody()
 		.strength(-1000)
@@ -14,12 +16,11 @@ var simulation = d3.forceSimulation()
 		.distanceMax(400)
 		.distanceMin(0)
 	)
-	.force('collision', d3.forceCollide().radius(16))
 	.force('collision', d3.forceCollide().radius(30))
 	// .forceX()
 	.force("x", d3.forceX(function (d){if (d.pos == "left"){ return 100} else { return 1000 }}))
 	// .force("x", d3.forceX(function (d) { return 800 }))
-	.force("y", d3.forceY(250))
+	.force("y", d3.forceY(450))	
 	// .force("center", d3.forceCenter(500, 250));
 	// 		.force('collide', d3.forceCollide()
 	//       .radius(d => 40)
@@ -57,8 +58,6 @@ let graph = {
 	]
 }
 
-console.log("HELLO I AM THE INIT JSON")
-console.log(typeof(graph))
 
 function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest();
@@ -89,11 +88,9 @@ function mouseover(d){
 			.style("font-size", "18px")
 			.text(d.equation[i]);
 	}
-	console.log(d);
 }
 
 function mouseout(d){
-	console.log(d);
 	var elem = document.querySelector("#hover");
 	while (elem != null){
 		elem.parentNode.removeChild(elem);
@@ -141,7 +138,7 @@ function run(graph) {
 			.on("drag", dragged)
 			.on("end", dragended))
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout);
+		.on("mouseout", mouseout)
 
 	var label = svg.append("g")
 		.attr("class", "labels")
@@ -194,6 +191,11 @@ function componentToHex(c) {
 }
 
 function dragstarted(d) {
+	if (d.settings){
+		console.log("YE CLICKED ON SETTINGS")
+		document.getElementById("settingc").style.visibility = "visible";
+		document.getElementById("settingext").style.visibility = "visible";
+	}
 	if (!d3.event.active) simulation.alphaTarget(0.3).restart()
 	d.fx = d.x
 	d.fy = d.y
@@ -233,9 +235,6 @@ var submit = function () {
 	inp1 = document.getElementById("inp1").value;
 	inp2 = document.getElementById("inp2").value;
 	inp3 = document.getElementById("inp3").value;
-	maxc = 3;
-	maxext = 4;
 	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
-	console.log(query0);
 	httpGetAsync(query0, run);
 }
