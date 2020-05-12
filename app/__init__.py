@@ -132,12 +132,14 @@ def api():
         ret_nodes.append({
             'id': i,
             'label': i.split('_')[1],
+            'pos': i.split('_')[0],
             'equation': j
         })
 
     ret_nodes.append({
         'id': 'left_%d_%d' % (0, pat[0]),
         'label': str(pat[0]),
+        'pos': 'left',
         'fx': 441,
         'fy': 334,
         'central': True,
@@ -147,6 +149,7 @@ def api():
     ret_nodes.append({
         'id': 'center_center',
         'label': str(pat[0]),
+        'pos': 'center',
         'fx': 513,
         'fy': 332,
         'central': True,
@@ -156,6 +159,7 @@ def api():
     ret_nodes.append({
         'id': 'right_%d_%d' % (0, pat[2]),
         'label': str(pat[2]),
+        'pos': 'right',
         'fx': 593,
         'fy': 330,
         'central': True,

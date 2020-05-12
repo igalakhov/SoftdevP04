@@ -48,3 +48,6 @@ ivanG -- 2020-10-05 11:07 PM
 
 ivanG -- 2020-11-05 6:30 PM
     Added more parameters to API as per moody's request
+
+ivanG -- 2020-11-05 8:00 PM
+    Nodes now have pos attribute
