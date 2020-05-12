@@ -12,6 +12,68 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/default")
+def default_json():
+
+
+# links: (17) […]​​
+# 0: {…}
+# ​​​
+# color: Array(3)[90, 233, 238]
+# ​​​
+# index: 0
+# ​​​
+# multi: false
+# ​​​
+# multicount: 1
+# ​​​
+# source: Object {central: true, fx: 593, fy: 300, …}
+# ​​​
+# target: Object {id: "right_1_15", label: "15", pos: "right", …}
+# ​​​
+# value: 1
+    return {
+
+        # 🪒ISOEIS
+        "nodes": [
+            {"id": "0", "central": True,
+                "label": "🪒", "equation": ["🪒", "is", "searching the", "online", "encyclopedia of", "integer", "sequences"]},
+
+            {"id": "1", "central": False,
+                "label": "I", "equation": ["Ivan Galakhov - Project Manager", "Moududur 'Moody' Rahman - Frontend", "Jude Rizzo - Flask"]},
+                
+            {"id": "2", "central": False,
+                "label": "S", "equation": ["Softdev P04"]},
+
+            {"id": "3", "central": False,
+                "label": "O", "equation": ["Edit the bottom inputs with", "the integer sequence you want to query"]},
+
+            {"id": "4", "central": False,
+                "label": "E", "equation": ["Let the program do", "it's magic"]},
+
+            {"id": "5", "central": False,
+                "label": "I", "equation": ["An Integer Sequence Visualization", "made during the rona pandemic 2020"]},
+
+            {"id": "6", "central": True,
+                "label": "S", "equation": ["Built using", "d3.js", "flask", "duct tape", "love"]},
+
+            {"id": "7", "central": True,
+                "label": "Hover over the nodes", "equation": ["You can also drag the nodes"], "fx":800, "fy":500}
+            
+        ],
+        "links": [
+
+            {"source": "0", "target": "1", "value": 1, "color":[3, 57, 82]},
+            {"source": "1", "target": "2", "value": 1, "color": [3, 57, 82]},
+            {"source": "2", "target": "3", "value": 1, "color": [3, 57, 82]},
+            {"source": "3", "target": "4", "value": 1, "color": [3, 57, 82]},
+            {"source": "4", "target": "5", "value": 1, "color": [3, 57, 82]},
+            {"source": "5", "target": "6", "value": 1, "color": [3, 57, 82]},
+
+        ]
+    }
+
+
 @app.route("/debug")
 def debug():
     return {
@@ -46,13 +108,15 @@ def api():
     if 'int1' not in request.args or 'int2' not in request.args or 'int3' not in request.args or 'maxcount' not in request.args or 'maxext' not in request.args:
         return '{}'
 
-    pat = [int(request.args['int1']), int(request.args['int2']), int(request.args['int3'])]
+    pat = [int(request.args['int1']), int(
+        request.args['int2']), int(request.args['int3'])]
     cnt = int(request.args['maxcount'])
     ext = int(request.args['maxext'])
 
     client = OEISClient()
 
-    res = client.lookup_by(prefix='%d,%d,%d' % tuple(pat), query='', max_seqs=cnt, list_func=True)
+    res = client.lookup_by(prefix='%d,%d,%d' % tuple(
+        pat), query='', max_seqs=cnt, list_func=True)
 
     # for i in res:
     #     print(i.unsigned_list, i.signed_list)
@@ -100,7 +164,8 @@ def api():
                 nodes_eq['left_%d_%d' % (j, i[0][j])].append(names[n])
 
         for j in range(len(i[0]) - 1):
-            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' % (j + 1, i[0][j + 1]))].append(n)
+            edges[('left_%d_%d' % (j, i[0][j]), 'left_%d_%d' %
+                   (j + 1, i[0][j + 1]))].append(n)
 
         for j in range(len(i[1])):
             nodes.add('right_%d_%d' % (j, i[1][j]))
@@ -109,7 +174,8 @@ def api():
                 nodes_eq['right_%d_%d' % (j, i[1][j])].append(names[n])
 
         for j in range(len(i[1]) - 1):
-            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' % (j + 1, i[1][j + 1]))].append(n)
+            edges[('right_%d_%d' % (j, i[1][j]), 'right_%d_%d' %
+                   (j + 1, i[1][j + 1]))].append(n)
 
     ret_links = []
     ret_nodes = []
@@ -141,7 +207,7 @@ def api():
         'label': str(pat[0]),
         'pos': 'left',
         'fx': 441,
-        'fy': 334,
+        'fy': 254,
         'central': True,
         'equation': list(names)
     })
@@ -151,7 +217,7 @@ def api():
         'label': str(pat[1]),
         'pos': 'center',
         'fx': 513,
-        'fy': 332,
+        'fy': 252,
         'central': True,
         'equation': list(names)
     })
@@ -161,7 +227,7 @@ def api():
         'label': str(pat[2]),
         'pos': 'right',
         'fx': 593,
-        'fy': 330,
+        'fy': 250,
         'central': True,
         'equation': list(names)
     })
