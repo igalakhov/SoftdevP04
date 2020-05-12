@@ -58,7 +58,7 @@ def default_json():
                 "label": "S", "equation": ["Built using", "d3.js", "flask", "duct tape", "love"]},
 
             {"id": "7", "central": True,
-                "label": "Hover over the nodes", "equation": ["You can also drag the nodes"], "fx":800, "fy":500}
+                "label": "Hover over the nodes", "equation": ["You can also drag the nodes"], "fx":100, "fy":700}
             
         ],
         "links": [
