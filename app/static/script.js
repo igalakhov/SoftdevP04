@@ -95,6 +95,12 @@ function run(graph) {
 	// 	//     d.target = d.target_id;
 	// });
 
+	if (typeof(graph) == ("string")){
+		graph = JSON.parse(graph);
+	}
+
+	console.log(graph);
+
 	var link = svg.append("g")
 		.style("stroke", "#aaa")
 		.selectAll("line")
