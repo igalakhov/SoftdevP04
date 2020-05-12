@@ -9,24 +9,32 @@ var simulation = d3.forceSimulation()
 	.force("link", d3.forceLink().id(function (d) { return d.id; }))
 	//.force("charge", d3.forceManyBody().strength(-200))
 	.force('charge', d3.forceManyBody()
-		.strength(-1000)
-		.theta(2)
-		.distanceMax(150)
-		.distanceMin(50)
-	);
+		.strength(-500)
+		// .theta(2)
+		.distanceMax(1000)
+		.distanceMin(0)
+	)
+	// .force('collision', d3.forceCollide().radius(30))
+	// .forceX()
+	.force("x", d3.forceX(function (d){return 500}))
+	.force("y", d3.forceY(600))
+	;
 	// 		.force('collide', d3.forceCollide()
 	//       .radius(d => 40)
 	//       .iterations(2)
 	//     )	
 	// .force("center", d3.forceCenter(width / 2, height / 2));
 
+// function xcoorforcecalc(d){
+// 	if 
+// }
 
 let graph = {
 
 	"nodes": [
-		{ "id": "0", "fx": 441, "fy": 334 , "central":true},
-		{ "id": "1", "fx": 513, "fy": 332 , "central":true},
-		{ "id": "2", "fx": 593, "fy": 330 , "central":true},
+		{ "id": "0", "fx": 441, "fy": 700 , "central":true},
+		{ "id": "1", "fx": 513, "fy": 700 , "central":true},
+		{ "id": "2", "fx": 593, "fy": 700 , "central":true},
 		{ "id": "4" , "equation":["x^2"]},
 		{ "id": "5" },
 		{ "id": "9" },
@@ -57,6 +65,16 @@ function httpGet(theUrl) {
 	return xmlHttp.responseText;
 }
 
+function httpGetAsync(theurl, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+	}
+	xmlHttp.open("GET", theurl, true); // true for asynchronous 
+	xmlHttp.send(null);
+}
+
 function mouseover(d){
 	// font-family="sans-serif" font-size="20px"
 	svg.append("text").attr("fill", "red").attr("id", "hover").attr("x", d.x + 0).attr("y", d.y + 15).text(d.equation)
@@ -77,6 +95,12 @@ function run(graph) {
 	// 	//     d.target = d.target_id;
 	// });
 
+	if (typeof(graph) == ("string")){
+		graph = JSON.parse(graph);
+	}
+
+	console.log(graph);
+
 	var link = svg.append("g")
 		.style("stroke", "#aaa")
 		.selectAll("line")
@@ -89,6 +113,8 @@ function run(graph) {
 		.data(graph.nodes)
 		.enter().append("circle")
 		.attr("r", 2)
+		.attr("cx", 500)
+		.attr("cy", 500)
 		.call(d3.drag()
 			.on("start", dragstarted)
 			.on("drag", dragged)
@@ -165,23 +191,32 @@ var hackclear = function () {
 	svg.append("g").append("rect").attr("width", 960).attr("height", 600).attr("style", "fill:rgb(255,255,255);");
 }
 
-run(graph);
+// run(graph);
+
+
+httpGetAsync("/api?int1=3&int2=5&int3=8&maxcount=3&maxext=4", run);
+
 
 var submit = function () {
 	inp1 = document.getElementById("inp1").value;
 	inp2 = document.getElementById("inp2").value;
 	inp3 = document.getElementById("inp3").value;
-	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}`;
+	maxc = 3;
+	maxext = 4;
+	
+	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
 	console.log(query0);
-	json = httpGet(query0);
-	console.log(json);
-
-	console.log("HELLO I AM THE DEBUG JSON")
-	console.log(typeof(json))
+	// hackclear();
 	document.getElementById("svg").innerHTML= "";
 
-	hackclear();
-	finjson = JSON.parse(json)
-	run(finjson);
+	// json = httpGet(query0);
+
+	httpGetAsync(query0, run);
+
+	// console.log(json);
+
+	// console.log("HELLO I AM THE DEBUG JSON")
+	// console.log(typeof(json))
+
 	
 }
