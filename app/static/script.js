@@ -25,13 +25,16 @@ var simulation = d3.forceSimulation()
 	//     )	
 	// .force("center", d3.forceCenter(width / 2, height / 2));
 
+// function xcoorforcecalc(d){
+// 	if 
+// }
 
 let graph = {
 
 	"nodes": [
-		{ "id": "0", "fx": 441, "fy": 334 , "central":true},
-		{ "id": "1", "fx": 513, "fy": 332 , "central":true},
-		{ "id": "2", "fx": 593, "fy": 330 , "central":true},
+		{ "id": "0", "fx": 441, "fy": 700 , "central":true},
+		{ "id": "1", "fx": 513, "fy": 700 , "central":true},
+		{ "id": "2", "fx": 593, "fy": 700 , "central":true},
 		{ "id": "4" , "equation":["x^2"]},
 		{ "id": "5" },
 		{ "id": "9" },
