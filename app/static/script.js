@@ -78,7 +78,15 @@ function httpGetAsync(theurl, callback) {
 
 function mouseover(d){
 	// font-family="sans-serif" font-size="20px"
-	svg.append("text").attr("fill", "red").attr("id", "hover").attr("x", d.x + 0).attr("y", d.y + 15).text(d.equation)
+
+	for (i = 0; i < d.equation.length; i++) {
+		svg.append("text")
+			.attr("fill", "red")
+			.attr("id", "hover")
+			.attr("x", d.x + 0)
+			.attr("y", (d.y - 50) +  (15*i))
+			.text(d.equation[i]);
+	}
 	console.log(d);
 }
 
