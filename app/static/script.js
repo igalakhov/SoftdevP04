@@ -106,6 +106,10 @@ function run(graph) {
 	// 	//     d.target = d.target_id;
 	// });
 	
+	if (graph == {}){
+		console.log("UR JSON? WACK")
+	}
+
 	d3.selectAll("svg > *").remove();
 
 	if (typeof(graph) == ("string")){
