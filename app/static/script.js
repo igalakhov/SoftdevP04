@@ -18,7 +18,7 @@ var simulation = d3.forceSimulation()
 	)
 	.force('collision', d3.forceCollide().radius(30))
 	// .forceX()
-	.force("x", d3.forceX(function (d){if (d.pos == "left"){ return 100} else { return 1000 }}))
+	.force("x", d3.forceX(function (d){if (d.pos == "left"){ return 1000} else { return 1000 }}))
 	// .force("x", d3.forceX(function (d) { return 800 }))
 	.force("y", d3.forceY(450))	
 	// .force("center", d3.forceCenter(500, 250));
@@ -241,6 +241,13 @@ var submit = function () {
 	inp3 = document.getElementById("inp3").value;
 	maxc = document.getElementById("settingc").value;
 	maxext = document.getElementById("settingext").value;
-	query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
-	httpGetAsync(query0, run);
+	if (inp1 == "" || inp2 == "" || inp3 == "" || maxc == "" || maxext == ""){
+		console.log("UR INPUT GOOFED")
+		document.getElementById("warning").style.visibility = "visible";
+	}
+	else {
+		query0 = `/api?int1=${inp1}&int2=${inp2}&int3=${inp3}&maxcount=${maxc}&maxext=${maxext}`;
+		console.log(query0);
+		httpGetAsync(query0, run);
+	}
 }
