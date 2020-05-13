@@ -240,6 +240,7 @@ def api():
 
     ret_nodes.append({
         'id': 'emergency',
+        "tag":"hold",
         'label': "HOLD DOWN ON THIS NODE IF THE SIMULATION IS NOT RESPONDING",
         'pos': 'right',
         'fx': 900,
