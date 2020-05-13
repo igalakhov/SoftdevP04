@@ -64,7 +64,7 @@ def default_json():
                 "label": "super secret settings", "equation": ["delete the default value's", "to see their purpose"], "fx":900, "fy":700, "settings":True},
 
             {"id": "9", "central": True,
-                "label": "explore this page before diving into 🪒ISOEIS", "equation": ["be warned"], "fx":100, "fy":100, "settings":True}
+                "label": "explore this page before diving into 🪒ISOEIS", "equation": ["be warned"], "fx":100, "fy":100}
             
         ],
         "links": [
@@ -236,6 +236,16 @@ def api():
         'fy': 450,
         'central': True,
         'equation': list(names)
+    })
+
+    ret_nodes.append({
+        'id': 'emergency',
+        'label': "HOLD DOWN ON THIS NODE IF THE SIMULATION IS NOT RESPONDING",
+        'pos': 'right',
+        'fx': 900,
+        'fy': 750,
+        'central': True,
+        'equation': [""]
     })
 
     ret_links.append({
