@@ -18,9 +18,9 @@ var simulation = d3.forceSimulation()
 	)
 	.force('collision', d3.forceCollide().radius(30))
 	// .forceX()
-	.force("x", d3.forceX(function (d){if (d.pos == "left"){ return 1000} else { return 1000 }}))
-	// .force("x", d3.forceX(function (d) { return 800 }))
-	.force("y", d3.forceY(450))	
+	.force("x", d3.forceX(function (d){if (d.pos == "left"){ return 700 } else { return 1000 }}))
+	// .force("x", d3.forceX(function (d) { return 1000 }))
+	.force("y", d3.forceY(450))
 	// .force("center", d3.forceCenter(500, 250));
 	// 		.force('collide', d3.forceCollide()
 	//       .radius(d => 40)
@@ -135,8 +135,6 @@ function run(graph) {
 		// .attr("cy", 500)
 		// .attr("x", 500)
 		// .attr("y", 500)
-		.attr("vx", .05)
-		.attr("vy", .05)
 		.call(d3.drag()
 			.on("start", dragstarted)
 			.on("drag", dragged)
@@ -175,13 +173,15 @@ function run(graph) {
 			.style("stroke", "#424242")
 			.style("stroke-width", "0px")
 			.attr("cx", function (d) { return d.x + 5; })
-			.attr("cy", function (d) { return d.y - 3; });
+			.attr("cy", function (d) { return d.y - 3; })
+			.attr("id", function (d) { return d.tag});
 
 		label
 			.attr("x", function (d) { return d.x; })
 			.attr("y", function (d) { return d.y + 2; })
 			.style("font-size", "20px").style("fill", "#333");
 	}
+
 }
 
 
