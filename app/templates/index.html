@@ -21,18 +21,23 @@
 		visibility: hidden;
 	}
 
+	#warning{
+		visibility: hidden;
+	}
+
 
 </style>
 
 <div class="row">
 
-	<svg id="svg" width="2000" height="800"></svg>
+	<svg id="svg" width="100%" height="800"></svg>
 	
 	<input type="number" id="inp1" name="int1">
 	<input type="number" id="inp2" name="int2">
 	<input type="number" id="inp3" name="int3">
 	<input type="number" id="settingc" name="maxc" placeholder="total equations to generate" value="4">
 	<input type="number" id="settingext" name="maxext" placeholder="nodes to generate left and right" value="4">
+	<div id="warning">MAKE SURE ALL INPUTS ARE FILLED</div>
 	<button type="submit" onclick="submit();">SUBMIT</button>
 	
 </div>
