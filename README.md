@@ -1,4 +1,4 @@
-# Team I am not Ok with this
+# 🪒ISOEIS Is Searching The Online Encyclopedia of Integer Sequences
 
 ### What is this project?
 
